@@ -10,7 +10,7 @@ except KeyError:
    sys.exit(1)
 
 TRAINING_KEY = os.environ["TRAINING_KEY"]
-SAMPLE_PROJECT_NAME = "nothotdog-classifier"
+PROJECT_NAME = "nothotdog-classifier-" + os.environ["BUILD_VER"]
 
 ENDPOINT = "https://australiaeast.api.cognitive.microsoft.com"
 
@@ -21,10 +21,10 @@ def find_or_create_project():
     trainer = CustomVisionTrainingClient(TRAINING_KEY, endpoint=ENDPOINT)
 
     for proj in trainer.get_projects():
-        if (proj.name == SAMPLE_PROJECT_NAME):
+        if (proj.name == PROJECT_NAME):
             trainer.delete_project(proj.id)
 
-    return trainer.create_project(SAMPLE_PROJECT_NAME)
+    return trainer.create_project(PROJECT_NAME)
 
 
 def train_project():
