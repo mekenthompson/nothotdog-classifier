@@ -1,2 +1,2 @@
 # nothotdog-classifier
-Image Classificatier using Azure Custom Vision to create nothotdog app
+Image classifier using Azure Custom Vision and Python SDK
