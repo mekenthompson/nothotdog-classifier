@@ -13,11 +13,13 @@ steps:
     displayName: Install requirements
   - script: |
       python train.py
-      printenv TRAINING_KEY
-      printenv PREDICTION_KEY
-      echo $TRAINING_KEY
-      echo $PREDICTION_KEY
+      printenv BUILD_VER
+      printenv SOURCE_VER
+      printenv BUILD_NUM
     displayName: Run Image Classifier
     env: 
       TRAINING_KEY: $(TRAININGKEY)
       PREDICTION_KEY: $(PREDICTIONKEY)
+      BUILD_VER: $(Build.BuildNumber)
+      SOURCE_VER: $(Build.SourceVersion)
+      BUILD_NUM: $(Build.BuildNumber)
