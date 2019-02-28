@@ -14,6 +14,6 @@ steps:
   - script: |
       python train.py
     displayName: Run Image Classifier
-    env: null
+    env: 
     TRAINING_KEY: $(TRAININGKEY)
     PREDICTION_KEY: $(PREDICTIONKEY)
