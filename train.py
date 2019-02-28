@@ -15,7 +15,7 @@ PROJECT_NAME = "nothotdog-classifier-" + os.environ["BUILD_VER"]
 ENDPOINT = "https://australiaeast.api.cognitive.microsoft.com"
 
 IMAGES_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), "images")
-
+#
 def find_or_create_project():
     # Use the training API to find the SDK sample project created from the training example.
     trainer = CustomVisionTrainingClient(TRAINING_KEY, endpoint=ENDPOINT)
