@@ -19,8 +19,8 @@ steps:
       python train.py
       printenv BUILD_VER
       printenv PROJECT_NAME
-      touch BUILD_ARTIFACTSTAGINGDIRECTORY/PROJECT_NAME
-      ls BUILD_ARTIFACTSTAGINGDIRECTORY
+      touch $BUILD_ARTIFACTSTAGINGDIRECTORY/$PROJECT_NAME
+      ls $BUILD_ARTIFACTSTAGINGDIRECTORY
     displayName: Run Image Classifier
     env: 
       TRAINING_KEY: $(TRAININGKEY)
