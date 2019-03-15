@@ -1,25 +1,35 @@
 trigger:
   - master
+
 pool:
   vmImage: Ubuntu-16.04
+  
 steps:
   - task: UsePythonVersion@0
     inputs:
       versionSpec: 3.7
       architecture: x64
+
   - script: |
       python -m pip install --upgrade pip setuptools wheel
       pip install -r requirements.txt
     displayName: Install requirements
+
   - script: |
       python train.py
       printenv BUILD_VER
-      printenv SOURCE_VER
-      printenv BUILD_NUM
+      printenv PROJECT_NAME
+      echo $PROJECT_NAME >> $BUILD_ARTIFACTSTAGINGDIRECTORY/PROJECT_NAME
+      ls $BUILD_ARTIFACTSTAGINGDIRECTORY
+      cat $BUILD_ARTIFACTSTAGINGDIRECTORY/PROJECT_NAME
     displayName: Run Image Classifier
     env: 
       TRAINING_KEY: $(TRAININGKEY)
       PREDICTION_KEY: $(PREDICTIONKEY)
       BUILD_VER: $(Build.BuildNumber)
-      SOURCE_VER: $(Build.SourceVersion)
-      BUILD_NUM: $(Build.BuildNumber)
+      PROJECT_NAME: nothotdog-classifier-$(Build.BuildNumber)
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: drop
